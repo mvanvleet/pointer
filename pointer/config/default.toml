@@ -1,0 +1,8 @@
+[paths]
+user_inputdir = "input/"
+saptdir = "sapt/"
+
+[qm]
+memory = "8GB"
+nprocs = 48
+package = "molpro"
