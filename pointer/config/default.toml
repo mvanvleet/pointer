@@ -1,8 +1,20 @@
 [paths]
 user_inputdir = "input/"
-saptdir = "sapt/"
+saptdir = "sapt/dimer_calcs"
+acshiftdir = "sapt/monomer_calcs/"
 
-[qm]
-memory = "8GB"
-nprocs = 48
+[qm-engine]
 package = "molpro"
+max_memory = "8 GB"
+max_nprocs = 8
+# Command-line argument to submit your package's job to the batch manager of your
+# choice. Make sure the command is in your $PATH, and can use the -n 
+# flag to set the ncpus requirements of the job. If using a scheduler, the command
+# should return the JobID as the last line in standard output.
+submitcommand = 'qmolpro'
+
+[scheduler]
+scheduler = 'pbs' # Options are 'pbs', 'bg'
+
+
+#TODO: add a flag for using resources in a greedy or conservative way?
