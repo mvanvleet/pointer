@@ -13,8 +13,9 @@ from .. import DATADIR
 TESTDIR = Path(__file__).parent / "data"
 
 def test_blank():
-    """It should be OK to have a blank monomer object"""
-    foo = Monomer()
+    """It should be not be OK to have a blank monomer object"""
+    with pytest.raises(ValueError):
+        foo = Monomer()
 
 def test_h2o():
     """Test parsing of a molecule with one conformer"""

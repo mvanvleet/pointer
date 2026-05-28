@@ -7,7 +7,8 @@ from pathlib import Path
 
 import pytest
 
-from pointer.quantum import molpro, acshift
+from pointer.quantum import acshift
+from pointer.engines import molpro
 from ..molecules import Monomer
 from .. import DATADIR
 
@@ -16,17 +17,18 @@ def test_bad_input():
     with pytest.raises(AttributeError):
         acshift.get_acshift('mthp')
 
-def test_input():
+@pytest.mark.longcompute
+def test_acshift():
     xyzfile = Path(DATADIR,'molecules/','2mthpax.xyz')
     mthp = Monomer(xyzfile,charge=0)
-
     acshift.get_acshift(mthp)
 
 def test_molpro_parse_ip_output():
     """Test parsing of Molpro IP Calculation Files"""
 
     ofile = Path(DATADIR,'quantum/','h2o_ip.out')
-    ip, homo = molpro.parse_ionization(ofile)
+    engine = molpro.Molpro()
+    ip, homo = engine.parse_ionization(ofile)
     expected_ip, expected_homo = 0.46602931, -0.333967
 
     assert pytest.approx(ip) == expected_ip

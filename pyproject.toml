@@ -82,3 +82,6 @@ default-tag = "1.0.0"
 
 [tool.versioningit.write]
 file = "pointer/_version.py"
+
+[tool.pytest.ini_options]
+markers = ["longcompute: computations with >30s expected runtime"]
